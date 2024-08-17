@@ -5,7 +5,6 @@
     box-sizing: border-box;
 }
 
-/* General Styles */
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
@@ -13,7 +12,7 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Container Styles */
+/* Responsive container */
 .container {
     width: 90%;
     max-width: 1200px;
@@ -25,49 +24,49 @@ body {
 header {
     background: linear-gradient(135deg, #4a90e2, #0033cc);
     color: #fff;
-    padding: 4rem 1rem; /* Increased padding */
+    padding: 3rem 1rem;
     text-align: center;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Adjusted shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
-    font-size: 3.5rem; /* Larger font size */
+    font-size: 3rem;
     margin-bottom: 0.5rem;
 }
 
 header p {
-    font-size: 1.4rem; /* Slightly larger font size */
+    font-size: 1.3rem;
 }
 
-/* Main Section Styles */
+/* Main Section */
 main {
-    padding: 3rem 0; /* Increased padding */
+    padding: 2rem 0;
 }
 
 /* Section Styles */
 section {
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    padding: 2.5rem; /* Increased padding */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
     margin-bottom: 2rem;
 }
 
 h2 {
     color: #0056b3;
-    font-size: 2rem; /* Increased font size */
+    font-size: 1.8rem;
     margin-bottom: 1rem;
 }
 
 code {
-    background: #f0f0f0; /* Slightly lighter background */
-    padding: 0.4rem 0.6rem;
+    background: #e0e0e0;
+    padding: 0.3rem 0.5rem;
     border-radius: 4px;
 }
 
 pre {
-    background: #f0f0f0;
-    padding: 1.75rem; /* Increased padding */
+    background: #e0e0e0;
+    padding: 1.5rem;
     border-radius: 6px;
     overflow-x: auto;
 }
@@ -91,59 +90,59 @@ footer {
     background: #111;
     color: #fff;
     text-align: center;
-    padding: 2.5rem 0; /* Increased padding */
+    padding: 2rem 0;
     position: relative;
     width: 100%;
-    box-shadow: 0 -6px 12px rgba(0, 0, 0, 0.25); /* Adjusted shadow */
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
 }
 
 footer p {
-    font-size: 1.2rem; /* Slightly larger font size */
+    font-size: 1.1rem;
     margin: 0.5rem 0;
 }
 
 footer .social-icons {
-    margin-top: 1.5rem; /* Increased margin */
+    margin-top: 1rem;
 }
 
 footer .social-icons a {
-    margin: 0 12px; /* Increased margin */
+    margin: 0 10px;
     text-decoration: none;
     color: #fff;
-    font-size: 1.7rem; /* Larger icon size */
+    font-size: 1.5rem;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     header h1 {
-        font-size: 2.5rem; /* Adjusted font size */
+        font-size: 2.2rem;
     }
 
     header p {
-        font-size: 1.2rem; /* Adjusted font size */
+        font-size: 1.1rem;
     }
 
     section {
-        padding: 2rem; /* Adjusted padding */
+        padding: 1.5rem;
     }
 
     h2 {
-        font-size: 1.8rem; /* Adjusted font size */
+        font-size: 1.6rem;
     }
 
     ul li {
-        font-size: 1rem; /* Adjusted font size */
+        font-size: 0.9rem;
     }
 
     footer {
-        padding: 2rem 0; /* Adjusted padding */
+        padding: 1.5rem 0;
     }
 
     footer p {
-        font-size: 1.1rem; /* Adjusted font size */
+        font-size: 1rem;
     }
 
     footer .social-icons a {
-        font-size: 1.5rem; /* Adjusted icon size */
+        font-size: 1.3rem;
     }
 }
