@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import google.generativeai as genai
 import threading
 import time
@@ -11,7 +11,7 @@ import logging
 
 app = Flask(__name__)
 
-# Configuration for API 1 (Generative AI)
+# Configuration for Generative AI API
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=GEMINI_API_KEY)
 
@@ -88,7 +88,7 @@ def keep_alive():
         except requests.exceptions.RequestException as e:
             print("Ping failed with exception", e)
 
-# Configuration for API 2 (Temporary Email)
+# Configuration for Temporary Email API
 domains = [
     "1secmail.com",
     "1secmail.org",
@@ -150,6 +150,15 @@ def handle_request():
     
     else:
         return jsonify({"error": "Invalid request"}), 400
+
+# Serve static files (like CSS) from the root directory
+@app.route('/')
+def index():
+    return send_from_directory('', 'index.html')
+
+@app.route('/styles.css')
+def styles():
+    return send_from_directory('', 'styles.css')
 
 # Start keep-alive thread
 threading.Thread(target=keep_alive, daemon=True).start()
