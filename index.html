@@ -5,8 +5,293 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Documentation</title>
     <link rel="stylesheet" href="/styles.css">
-    <!-- Adding FontAwesome for social icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset default browser styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        /* Responsive container */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #4a90e2, #0033cc);
+            color: #fff;
+            padding: 3rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.3rem;
+        }
+
+        /* Main Section */
+        main {
+            padding: 2rem 0;
+        }
+
+        /* Section Styles */
+        section {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: #0056b3;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        code {
+            background: #e0e0e0;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        pre {
+            background: #e0e0e0;
+            padding: 1.5rem;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+
+        /* List Styles */
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+            padding: 0.75rem;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: #111;
+            color: #fff;
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+            width: 100%;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        footer p {
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+        }
+
+        footer .social-icons {
+            margin-top: 1rem;
+        }
+
+        footer .social-icons a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        /* Music Player Styles */
+        #music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px; 
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.8); 
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease; 
+        }
+
+        #music-control:hover {
+            transform: scale(1.1); 
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        #music-control img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .music-icon {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            color: #4a90e2;
+            opacity: 0;
+            animation: radiate 3s ease-in-out infinite;
+        }
+
+        .music-icon:nth-child(1) {
+            top: -20px;
+            left: 50%;
+            animation-delay: 0s;
+        }
+
+        .music-icon:nth-child(2) {
+            top: 50%;
+            left: -20px;
+            animation-delay: 0.5s;
+        }
+
+        .music-icon:nth-child(3) {
+            bottom: -20px;
+            left: 50%;
+            animation-delay: 1s;
+        }
+
+        .music-icon:nth-child(4) {
+            top: 50%;
+            right: -20px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes radiate {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+
+        .beat-effect {
+            position: absolute;
+            top: -60px;
+            left: -60px;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: rgba(74, 144, 226, 0.6);
+            box-shadow: 0 0 30px rgba(74, 144, 226, 0.8);
+            animation: beat 1s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes beat {
+            0% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+        }
+
+        #music-notification {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background-color: #fff;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            font-size: 1rem;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out; 
+        }
+
+        #music-notification.show {
+            opacity: 1;
+            transform: translateY(-10px); 
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            header p {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            ul li {
+                font-size: 0.9rem;
+            }
+
+            footer {
+                padding: 1.5rem 0;
+            }
+
+            footer p {
+                font-size: 1rem;
+            }
+
+            footer .social-icons a {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -15,6 +300,7 @@
             <p>Your gateway to integrating with our services.</p>
         </div>
     </header>
+
     <main class="container">
         <section id="api-1">
             <h2>Generative AI API</h2>
@@ -54,6 +340,7 @@
 }</code></pre>
         </section>
     </main>
+
     <footer>
         <div class="container">
             <p>&copy; 2024 Your Company. All rights reserved.</p>
@@ -64,5 +351,53 @@
             </div>
         </div>
     </footer>
+
+    <div id="music-control">
+        <div class="beat-effect"></div>
+        <img src="https://i.ibb.co/rM1Y2Q8/IMG-20240817-202204.jpg" alt="Music Control">
+        <i class="fas fa-music music-icon"></i>
+        <i class="fas fa-music music-icon"></i>
+        <i class="fas fa-music music-icon"></i>
+        <i class="fas fa-music music-icon"></i>
+    </div>
+    <div id="music-notification">Music is playing...</div>
+
+    <audio id="background-music" autoplay loop>
+        <source src="https://www.dropbox.com/scl/fi/k4xcto66iv636j0p1zzdo/Ace-of-Base-Happy-Nation-Official-Music-Video-MP3_320K.mp3?rlkey=800j2ub06fv7hj9vc70i60l5o&dl=1" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const music = document.getElementById("background-music");
+        const musicControl = document.getElementById("music-control");
+        const musicNotification = document.getElementById("music-notification");
+
+        // Ensure music starts automatically
+        music.play().catch(() => {
+            console.log('Auto-play was prevented');
+        });
+
+        // Music control button functionality
+        musicControl.addEventListener("click", () => {
+            if (music.paused) {
+                music.play();
+                localStorage.setItem('musicPaused', 'false');
+                showNotification("Music is playing...");
+            } else {
+                music.pause();
+                localStorage.setItem('musicPaused', 'true');
+                showNotification("Music is paused.");
+            }
+        });
+
+        // Show music notification
+        function showNotification(message) {
+            musicNotification.textContent = message;
+            musicNotification.classList.add("show");
+            setTimeout(() => {
+                musicNotification.classList.remove("show");
+            }, 2000);
+        }
+    </script>
 </body>
 </html>
