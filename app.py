@@ -76,7 +76,7 @@ def ping():
     return jsonify({"status": "alive"})
 
 def keep_alive():
-    url = "https://gemini-api-5dl7.onrender.com"  # Replace with your actual URL
+    url = "https://allset-bro.onrender.com"  # Replace with your actual URL
     while True:
         time.sleep(600)  # Ping every 10 minutes
         try:
