@@ -5,6 +5,7 @@
     box-sizing: border-box;
 }
 
+/* General Styles */
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
@@ -12,7 +13,7 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Responsive container */
+/* Container Styles */
 .container {
     width: 90%;
     max-width: 1200px;
@@ -24,60 +25,51 @@ body {
 header {
     background: linear-gradient(135deg, #4a90e2, #0033cc);
     color: #fff;
-    padding: 3rem 1rem;
+    padding: 4rem 1rem; /* Increased padding */
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Adjusted shadow */
 }
 
 header h1 {
-    font-size: 3rem;
+    font-size: 3.5rem; /* Larger font size */
     margin-bottom: 0.5rem;
 }
 
 header p {
-    font-size: 1.3rem;
+    font-size: 1.4rem; /* Slightly larger font size */
 }
 
-/* Main Section */
+/* Main Section Styles */
 main {
-    padding: 2rem 0;
+    padding: 3rem 0; /* Increased padding */
 }
 
 /* Section Styles */
 section {
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    padding: 2.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    padding: 2.5rem; /* Increased padding */
     margin-bottom: 2rem;
-    transition: box-shadow 0.3s ease-in-out;
-}
-
-section:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 h2 {
     color: #0056b3;
-    font-size: 1.8rem;
+    font-size: 2rem; /* Increased font size */
     margin-bottom: 1rem;
 }
 
 code {
-    background: #e0e0e0;
-    padding: 0.3rem 0.5rem;
+    background: #f0f0f0; /* Slightly lighter background */
+    padding: 0.4rem 0.6rem;
     border-radius: 4px;
-    font-weight: bold;
-    font-size: 1rem;
 }
 
 pre {
-    background: #e0e0e0;
-    padding: 1.5rem;
+    background: #f0f0f0;
+    padding: 1.75rem; /* Increased padding */
     border-radius: 6px;
     overflow-x: auto;
-    font-size: 0.9rem;
-    line-height: 1.4;
 }
 
 /* List Styles */
@@ -92,11 +84,6 @@ ul li {
     border-radius: 6px;
     margin-bottom: 0.75rem;
     padding: 0.75rem;
-    transition: background-color 0.3s;
-}
-
-ul li:hover {
-    background: #f0f8ff;
 }
 
 /* Footer Styles */
@@ -104,59 +91,59 @@ footer {
     background: #111;
     color: #fff;
     text-align: center;
-    padding: 2rem 0;
+    padding: 2.5rem 0; /* Increased padding */
     position: relative;
     width: 100%;
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 -6px 12px rgba(0, 0, 0, 0.25); /* Adjusted shadow */
 }
 
 footer p {
-    font-size: 1.1rem;
+    font-size: 1.2rem; /* Slightly larger font size */
     margin: 0.5rem 0;
 }
 
 footer .social-icons {
-    margin-top: 1rem;
+    margin-top: 1.5rem; /* Increased margin */
 }
 
 footer .social-icons a {
-    margin: 0 10px;
+    margin: 0 12px; /* Increased margin */
     text-decoration: none;
     color: #fff;
-    font-size: 1.5rem;
+    font-size: 1.7rem; /* Larger icon size */
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     header h1 {
-        font-size: 2.2rem;
+        font-size: 2.5rem; /* Adjusted font size */
     }
 
     header p {
-        font-size: 1.1rem;
+        font-size: 1.2rem; /* Adjusted font size */
     }
 
     section {
-        padding: 1.5rem;
+        padding: 2rem; /* Adjusted padding */
     }
 
     h2 {
-        font-size: 1.6rem;
+        font-size: 1.8rem; /* Adjusted font size */
     }
 
     ul li {
-        font-size: 0.9rem;
+        font-size: 1rem; /* Adjusted font size */
     }
 
     footer {
-        padding: 1.5rem 0;
+        padding: 2rem 0; /* Adjusted padding */
     }
 
     footer p {
-        font-size: 1rem;
+        font-size: 1.1rem; /* Adjusted font size */
     }
 
     footer .social-icons a {
-        font-size: 1.3rem;
+        font-size: 1.5rem; /* Adjusted icon size */
     }
 }
