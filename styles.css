@@ -5,16 +5,11 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 body {
     font-family: 'Poppins', sans-serif;
-    line-height: 1.7;
+    line-height: 1.6;
     color: #333;
-    background-color: #f9f9f9;
-    letter-spacing: 0.02em;
+    background-color: #f4f4f4;
 }
 
 /* Responsive container */
@@ -27,38 +22,21 @@ body {
 
 /* Header Styles */
 header {
-    background: linear-gradient(135deg, #0056b3, #002d73);
+    background: linear-gradient(135deg, #4a90e2, #0033cc);
     color: #fff;
     padding: 3rem 1rem;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
-    font-size: 3.2rem;
+    font-size: 3rem;
     margin-bottom: 0.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-weight: 600;
 }
 
 header p {
-    font-size: 1.4rem;
-    opacity: 0.9;
-}
-
-.cta-button {
-    display: inline-block;
-    background-color: #0056b3;
-    color: #fff;
-    padding: 1rem 2rem;
-    border-radius: 50px;
-    text-decoration: none;
-    font-size: 1.2rem;
-    margin-top: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-.cta-button:hover {
-    background-color: #003d99;
+    font-size: 1.3rem;
 }
 
 /* Main Section */
@@ -70,26 +48,31 @@ main {
 section {
     background: #fff;
     border-radius: 16px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-    padding: 2.5rem;
-    margin-bottom: 2.5rem;
-    animation: fadeInUp 0.6s ease-out;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
 }
 
 h2 {
-    color: #003d99;
+    color: #0056b3;
     font-size: 2rem;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
 }
 
 code {
-    background: #e0e0e0;
+    background: #f1f1f1;
     padding: 0.3rem 0.5rem;
     border-radius: 4px;
 }
 
 pre {
-    background: #e0e0e0;
+    background: #f1f1f1;
     padding: 1.5rem;
     border-radius: 6px;
     overflow-x: auto;
@@ -102,27 +85,22 @@ ul {
 }
 
 ul li {
-    background: #f8f8f8;
+    background: #fafafa;
     border: 1px solid #ddd;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    transition: box-shadow 0.2s ease;
-}
-
-ul li:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+    padding: 0.75rem;
 }
 
 /* Footer Styles */
 footer {
-    background: linear-gradient(135deg, #222, #111);
+    background: linear-gradient(to right, #111, #333);
     color: #fff;
     text-align: center;
-    padding: 3rem 0;
+    padding: 2rem 0;
     position: relative;
     width: 100%;
-    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
 }
 
 footer p {
@@ -135,26 +113,25 @@ footer .social-icons {
 }
 
 footer .social-icons a {
-    margin: 0 15px;
+    margin: 0 10px;
     text-decoration: none;
     color: #fff;
     font-size: 1.8rem;
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition: color 0.3s ease;
 }
 
 footer .social-icons a:hover {
-    transform: scale(1.2);
     color: #4a90e2;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     header h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
 
     header p {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
     section {
@@ -170,7 +147,7 @@ footer .social-icons a:hover {
     }
 
     footer {
-        padding: 2rem 0;
+        padding: 1.5rem 0;
     }
 
     footer p {
@@ -182,14 +159,17 @@ footer .social-icons a:hover {
     }
 }
 
-/* Animations */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Smooth Hover Effects */
+a {
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
+
+button, .btn {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+    
