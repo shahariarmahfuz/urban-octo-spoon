@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>About- Shahariar Mahfuz</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    background: #000;
+    margin: 0;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.glass-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2), 0 0 10px rgba(255, 255, 255, 0.3);
+    animation: fadeIn 2s ease-out;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.profile-picture-container {
+    position: absolute;
+    top: -40px; /* Adjust this value as needed */
+    right: 20px; /* Adjust this value to position it outside */
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 1;
+    padding: 0; /* Removed padding */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    animation: fadeInProfile 2s ease-out;
+    display: flex; /* Added flexbox to center the image */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    pointer-events: none; /* Prevent interaction */
+}
+
+.profile-picture {
+    width: 115%;
+    height: 115%;
+    object-fit: cover;
+    pointer-events: none; /* Prevent interaction */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInProfile {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.glass-content {
+    color: #ffdf80;
+    width: 100%;
+    flex-grow: 1;
+    padding-top: 60px; /* Adjusted to ensure profile picture is fully inside the box */
+    box-sizing: border-box;
+    overflow-y: auto;
+    text-align: left;
+}
+
+.glass-content h1, .glass-content h3, .glass-content p {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.glass-content p {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+@keyframes sideAnimation {
+    0% { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
+    50% { transform: translateX(-50%) translateY(-50%) rotate(180deg); }
+    100% { transform: translateX(-50%) translateY(-50%) rotate(360deg); }
+}
+
+.glass-container::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 15px;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+    animation: sideAnimation 5s infinite linear;
+    pointer-events: none;
+}
+
+@media (min-width: 600px) {
+    .glass-container {
+        width: 80%;
+    }
+
+    .glass-container.large {
+        height: auto; /* Increased height for the first box */
+    }
+
+    .glass-container.small {
+        height: auto; /* Adjusted height for the second box */
+    }
+}
+
+@media (max-width: 599px) {
+    .glass-container {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .glass-container.large,
+    .glass-container.small {
+        height: auto; /* Allow height to adjust based on content */
+    }
+
+    .glass-content {
+        padding-top: 60px; /* Adjust padding for smaller screens */
+    }
+
+    .profile-picture-container {
+        top: 20px; /* Adjust position for smaller screens */
+        right: 20px; /* Adjust right position for smaller screens */
+        width: 70px;
+        height: 70px;
+    }
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    width: 100%; /* Ensure footer takes full width */
+    display: flex;
+    justify-content: center;
+}
+</style>
+<script>
+document.addEventListener('contextmenu', function(e) {
+    if (e.target.closest('.profile-picture')) {
+        e.preventDefault();
+    }
+});
+</script>
+    <div class="glass-container large">
+        <div class="profile-picture-container">
+            <img src="https://i.postimg.cc/fynPCzwW/img-1-1717419133765.webp" alt="Profile Picture" class="profile-picture">
+        </div>
+        <div class="glass-content">
+            <h4>About Me</h4>
+            <p>Welcome to my personal webpage! I'm Shahariar Mahfuz, passionate about the mysteries of sleep and undiscovered knowledge. Join me on a journey of exploration and enlightenment.</p>
+            <h4>Professional Background</h4>
+            <p>I have a background in Russia and currently work as a Vice President. My expertise includes enhancing attractiveness and aesthetics, ensuring projects are completed beautifully.</p>
+        </div>
+    </div>
+    <div class="glass-container small">
+        <div class="glass-content">
+            <h4>Contact Me</h4>
+            <p>If you have any questions or would like to get in touch, feel free to email me at for04866@gmail.com. Connect with me on <a href="https://m.me/gamerboymahfuz" style="color: #DAA520;">Facebook</a> for updates and engaging discussions!</p>
+            <h4>Personal Information</h4>
+            <p>I reside in the charming Sonargaon Thana, nestled within the vibrant district of Narayanganj, part of the bustling Dhaka division. My home is in the heart of Bangladesh, a jewel on our blue planet Earth, located in the Milky Way galaxy, orbiting close to the life-giving sun.</p>
+        </div>
+    </div>
+    <footer>© 2024 Shahariar Mahfuz. All rights reserved</footer>
+</body>
+</html>
