@@ -24,12 +24,12 @@ generation_config = {
 }
 
 model = genai.GenerativeModel(
-    model_name="gemini-1.5-pro",
+    model_name="gemini-1.5-flash",
     generation_config=generation_config,
 )
 
 chat_sessions = {}  # Dictionary to store chat sessions per user
-SESSION_TIMEOUT = 3600  # 1 hour timeout for sessions
+SESSION_TIMEOUT = 1800  # 1 hour timeout for sessions
 
 def cleanup_sessions():
     """Remove expired sessions."""
@@ -50,7 +50,7 @@ def ask():
         if user_id not in chat_sessions:
             chat_sessions[user_id] = {
                 "chat": model.start_chat(history=[]),
-                "history": deque(maxlen=5),  # Stores the last 5 messages
+                "history": deque(maxlen=3),  # Stores the last 5 messages
                 "last_activity": time.time()
             }
 
