@@ -29,7 +29,7 @@ model = genai.GenerativeModel(
 )
 
 chat_sessions = {}  # Dictionary to store chat sessions per user
-SESSION_TIMEOUT = 1800  # 1 hour timeout for sessions
+SESSION_TIMEOUT = 3600  # 1 hour timeout for sessions
 
 def cleanup_sessions():
     """Remove expired sessions."""
@@ -38,19 +38,24 @@ def cleanup_sessions():
         if current_time - chat_sessions[user_id]['last_activity'] > SESSION_TIMEOUT:
             del chat_sessions[user_id]
 
-@app.route('/ask', methods=['GET'])
+@app.route('/ask', methods=['GET', 'POST'])
 def ask():
-    query = request.args.get('q')
-    user_id = request.args.get('id')
+    if request.method == 'POST':
+        data = request.get_json()
+        query = data.get('q')
+        user_id = data.get('id')
+    else:
+        query = request.args.get('q')
+        user_id = request.args.get('id')
 
     if not query or not user_id:
-        return jsonify({"error": "Please provide both query and id parameters."}), 400
+        return jsonify({"error": "Please provide both query and id."}), 400
 
     try:
         if user_id not in chat_sessions:
             chat_sessions[user_id] = {
                 "chat": model.start_chat(history=[]),
-                "history": deque(maxlen=3),  # Stores the last 5 messages
+                "history": deque(maxlen=5),  # Stores the last 5 messages
                 "last_activity": time.time()
             }
 
