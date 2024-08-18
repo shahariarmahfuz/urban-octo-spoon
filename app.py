@@ -38,8 +38,43 @@ def cleanup_sessions():
         if current_time - chat_sessions[user_id]['last_activity'] > SESSION_TIMEOUT:
             del chat_sessions[user_id]
 
-@app.route('/response', methods=['POST'])
+@app.route('/ask', methods=['GET'])
 def ask():
+    """Handle GET requests for retrieving responses."""
+    query = request.args.get('q')
+    user_id = request.args.get('id')
+
+    if not query or not user_id:
+        return jsonify({"error": "Please provide both query and id."}), 400
+
+    try:
+        if user_id not in chat_sessions:
+            chat_sessions[user_id] = {
+                "chat": model.start_chat(history=[]),
+                "history": deque(maxlen=5),  # Stores the last 5 messages
+                "last_activity": time.time()
+            }
+
+        chat_session = chat_sessions[user_id]["chat"]
+        history = chat_sessions[user_id]["history"]
+
+        # Add the user query to history
+        history.append(f"User: {query}")
+        response = chat_session.send_message(query)
+        # Add the bot response to history
+        history.append(f"Bot: {response.text}")
+
+        chat_sessions[user_id]["last_activity"] = time.time()  # Update session activity
+
+        return jsonify({"response": response.text})
+    
+    except Exception as e:
+        logging.error(f"Error during chat processing: {e}")
+        return jsonify({"error": "An error occurred while processing your request."}), 500
+
+@app.route('/response', methods=['POST'])
+def response():
+    """Handle POST requests for receiving responses."""
     data = request.get_json()
     query = data.get('q')
     user_id = data.get('id')
@@ -51,7 +86,7 @@ def ask():
         if user_id not in chat_sessions:
             chat_sessions[user_id] = {
                 "chat": model.start_chat(history=[]),
-                "history": deque(maxlen=5),  # Stores the last 5 messages
+                "history": deque(maxlen=3),  # Stores the last 5 messages
                 "last_activity": time.time()
             }
 
