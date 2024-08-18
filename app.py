@@ -8,6 +8,7 @@ import random
 import string
 from collections import deque
 import logging
+import asyncio
 
 app = Flask(__name__)
 
@@ -38,20 +39,20 @@ def cleanup_sessions():
         if current_time - chat_sessions[user_id]['last_activity'] > SESSION_TIMEOUT:
             del chat_sessions[user_id]
 
-@app.route('/ask', methods=['GET', 'POST'])
-def ask():
-    if request.method == 'POST':
+async def get_response(chat_session, query):
+    """Asynchronously send the query to the model and get the response."""
+    return chat_session.send_message(query)
+
+@app.route('/ask', methods=['POST'])
+async def ask():
+    try:
         data = request.get_json()
         query = data.get('q')
         user_id = data.get('id')
-    else:
-        query = request.args.get('q')
-        user_id = request.args.get('id')
 
-    if not query or not user_id:
-        return jsonify({"error": "Please provide both query and id."}), 400
+        if not query or not user_id:
+            return jsonify({"error": "Please provide both query and id."}), 400
 
-    try:
         if user_id not in chat_sessions:
             chat_sessions[user_id] = {
                 "chat": model.start_chat(history=[]),
@@ -64,14 +65,14 @@ def ask():
 
         # Add the user query to history
         history.append(f"User: {query}")
-        response = chat_session.send_message(query)
+        response = await get_response(chat_session, query)  # Asynchronously get the response
         # Add the bot response to history
         history.append(f"Bot: {response.text}")
 
         chat_sessions[user_id]["last_activity"] = time.time()  # Update session activity
 
         return jsonify({"response": response.text})
-    
+
     except Exception as e:
         logging.error(f"Error during chat processing: {e}")
         return jsonify({"error": "An error occurred while processing your request."}), 500
