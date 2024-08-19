@@ -1,4 +1,3 @@
-import os
 from flask import Flask, request, jsonify, send_from_directory
 import google.generativeai as genai
 import threading
@@ -8,6 +7,7 @@ import random
 import string
 from collections import deque
 import logging
+import asyncio
 
 app = Flask(__name__)
 
@@ -43,15 +43,20 @@ model_pro = genai.GenerativeModel(
     generation_config=generation_config_pro,
 )
 
-chat_sessions = {}  # Dictionary to store chat sessions per user
-SESSION_TIMEOUT = 3600  # 1 hour timeout for sessions
+# Separate session management for /ask and /response
+chat_sessions_ask = {}  # Dictionary to store chat sessions for /ask
+chat_sessions_response = {}  # Dictionary to store chat sessions for /response
+SESSION_TIMEOUT = 900  # 1 hour timeout for sessions
 
 def cleanup_sessions():
     """Remove expired sessions."""
     current_time = time.time()
-    for user_id in list(chat_sessions.keys()):
-        if current_time - chat_sessions[user_id]['last_activity'] > SESSION_TIMEOUT:
-            del chat_sessions[user_id]
+    for user_id in list(chat_sessions_ask.keys()):
+        if current_time - chat_sessions_ask[user_id]['last_activity'] > SESSION_TIMEOUT:
+            del chat_sessions_ask[user_id]
+    for user_id in list(chat_sessions_response.keys()):
+        if current_time - chat_sessions_response[user_id]['last_activity'] > SESSION_TIMEOUT:
+            del chat_sessions_response[user_id]
 
 @app.route('/ask', methods=['GET'])
 def ask():
@@ -63,15 +68,15 @@ def ask():
         return jsonify({"error": "Please provide both query and id."}), 400
 
     try:
-        if user_id not in chat_sessions:
-            chat_sessions[user_id] = {
+        if user_id not in chat_sessions_ask:
+            chat_sessions_ask[user_id] = {
                 "chat": model_flash.start_chat(history=[]),  # Using gemini-1.5-flash for /ask
                 "history": deque(maxlen=5),  # Stores the last 5 messages
                 "last_activity": time.time()
             }
 
-        chat_session = chat_sessions[user_id]["chat"]
-        history = chat_sessions[user_id]["history"]
+        chat_session = chat_sessions_ask[user_id]["chat"]
+        history = chat_sessions_ask[user_id]["history"]
 
         # Add the user query to history
         history.append(f"User: {query}")
@@ -79,7 +84,7 @@ def ask():
         # Add the bot response to history
         history.append(f"Bot: {response.text}")
 
-        chat_sessions[user_id]["last_activity"] = time.time()  # Update session activity
+        chat_sessions_ask[user_id]["last_activity"] = time.time()  # Update session activity
 
         return jsonify({"response": response.text})
     
@@ -88,7 +93,7 @@ def ask():
         return jsonify({"error": "An error occurred while processing your request."}), 500
 
 @app.route('/response', methods=['POST'])
-def response():
+async def response():
     """Handle POST requests for receiving responses."""
     data = request.get_json()
     query = data.get('q')
@@ -98,23 +103,23 @@ def response():
         return jsonify({"error": "Please provide both query and id."}), 400
 
     try:
-        if user_id not in chat_sessions:
-            chat_sessions[user_id] = {
+        if user_id not in chat_sessions_response:
+            chat_sessions_response[user_id] = {
                 "chat": model_pro.start_chat(history=[]),  # Using gemini-1.5-pro for /response
-                "history": deque(maxlen=3),  # Stores the last 5 messages
+                "history": deque(maxlen=3),  # Stores the last 3 messages
                 "last_activity": time.time()
             }
 
-        chat_session = chat_sessions[user_id]["chat"]
-        history = chat_sessions[user_id]["history"]
+        chat_session = chat_sessions_response[user_id]["chat"]
+        history = chat_sessions_response[user_id]["history"]
 
         # Add the user query to history
         history.append(f"User: {query}")
-        response = chat_session.send_message(query)
+        response = await chat_session.send_message(query)  # Use async for sending message
         # Add the bot response to history
         history.append(f"Bot: {response.text}")
 
-        chat_sessions[user_id]["last_activity"] = time.time()  # Update session activity
+        chat_sessions_response[user_id]["last_activity"] = time.time()  # Update session activity
 
         return jsonify({"response": response.text})
     
