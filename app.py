@@ -25,9 +25,9 @@ generation_config_flash = {
 }
 
 generation_config_pro = {
-    "temperature": 1,
-    "top_p": 0.95,
-    "top_k": 64,
+    "temperature": 0.5,
+    "top_p": 0.9,
+    "top_k": 50,
     "max_output_tokens": 8192,
     "response_mime_type": "text/plain",
 }
