@@ -15,7 +15,8 @@ app = Flask(__name__)
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=GEMINI_API_KEY)
 
-generation_config = {
+# Separate generation configurations for different models
+generation_config_flash = {
     "temperature": 1,
     "top_p": 0.95,
     "top_k": 64,
@@ -23,9 +24,23 @@ generation_config = {
     "response_mime_type": "text/plain",
 }
 
-model = genai.GenerativeModel(
+generation_config_pro = {
+    "temperature": 1,
+    "top_p": 0.95,
+    "top_k": 64,
+    "max_output_tokens": 8192,
+    "response_mime_type": "text/plain",
+}
+
+# Models for different requests
+model_flash = genai.GenerativeModel(
+    model_name="gemini-1.5-flash",
+    generation_config=generation_config_flash,
+)
+
+model_pro = genai.GenerativeModel(
     model_name="gemini-1.5-pro",
-    generation_config=generation_config,
+    generation_config=generation_config_pro,
 )
 
 chat_sessions = {}  # Dictionary to store chat sessions per user
@@ -50,7 +65,7 @@ def ask():
     try:
         if user_id not in chat_sessions:
             chat_sessions[user_id] = {
-                "chat": model.start_chat(history=[]),
+                "chat": model_flash.start_chat(history=[]),  # Using gemini-1.5-flash for /ask
                 "history": deque(maxlen=5),  # Stores the last 5 messages
                 "last_activity": time.time()
             }
@@ -85,7 +100,7 @@ def response():
     try:
         if user_id not in chat_sessions:
             chat_sessions[user_id] = {
-                "chat": model.start_chat(history=[]),
+                "chat": model_pro.start_chat(history=[]),  # Using gemini-1.5-pro for /response
                 "history": deque(maxlen=3),  # Stores the last 5 messages
                 "last_activity": time.time()
             }
