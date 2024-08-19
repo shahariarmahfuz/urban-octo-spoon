@@ -1,3 +1,5 @@
 Flask
-google-generativeai  # Replace with the appropriate version
+google-generativeai  # আপনার প্রকল্পের জন্য সঠিক সংস্করণ চেক করুন
 requests
+aiohttp  # যদি আপনার প্রকল্পে asynchronous HTTP ক্লায়েন্ট প্রয়োজন হয়
+asyncio  # যদি asyncio প্রয়োজন হয়, সাধারণত Python এর সাথে অন্তর্ভুক্ত থাকে
