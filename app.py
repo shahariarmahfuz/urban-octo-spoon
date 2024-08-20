@@ -214,8 +214,14 @@ def styles():
 
 # Start keep-alive thread
 threading.Thread(target=keep_alive, daemon=True).start()
+
 # Cleanup old sessions every 15 minutes
-threading.Thread(target=lambda: time.sleep(900) or cleanup_sessions(), daemon=True).start()
+def periodic_cleanup():
+    while True:
+        time.sleep(900)  # Cleanup every 15 minutes
+        cleanup_sessions()
+
+threading.Thread(target=periodic_cleanup, daemon=True).start()
 
 if __name__ == '__main__':
     from os import environ
