@@ -127,7 +127,7 @@ def ping():
     return jsonify({"status": "alive"})
 
 def keep_alive():
-    url = "https://nimbuscloud.onrender.com"  # Replace with your actual URL
+    url = "https://my-ai-o83s.onrender.com"  # Replace with your actual URL
     while True:
         time.sleep(600)  # Ping every 10 minutes
         try:
